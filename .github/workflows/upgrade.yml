@@ -30,7 +30,7 @@ jobs:
           repository: '${{github.event.inputs.owner}}/${{github.event.inputs.blueprint}}'
           path: ${{github.event.inputs.blueprint}}
       - run: npm install generator-jhipster@${{github.event.inputs.generator-jhipster-version}} --save-exact
-      - run: npm update-snapshot
+      - run: npm run update-snapshot
       - run: git commit -a -m "bump generator-jhipster to v${{github.event.inputs.generator-jhipster-version}}" || true
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
