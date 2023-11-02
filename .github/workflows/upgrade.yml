@@ -1,0 +1,41 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Upgradle
+
+on:
+  workflow_dispatch:
+    inputs:
+      blueprint:
+        required: true
+        description: Blueprint repository to be upgraded
+      owner:
+        default: jhipster
+        description: Repository owner
+      generator-jhipster-version:
+        default: latest
+        description: JHipster version
+
+permissions:
+  contents: read
+
+jobs:
+  upgrade:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}/${{github.event.inputs.blueprint}}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          path: ${{github.event.inputs.blueprint}}
+          working-directory: ${{github.workspace}}/${{github.event.inputs.blueprint}}
+      - run: npm install generator-jhipster@${{github.event.inputs.generator-jhipster-version}} --save-exact
+      - run: npm update-snapshot
+      - run: git commit -a -m "bump generator-jhipster to v${{github.event.inputs.generator-jhipster-version}}" || true
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'bump generator-jhipster to v${{github.event.inputs.generator-jhipster-version}}'
+          title: 'bump generator-jhipster to v${{github.event.inputs.generator-jhipster-version}}'
+          body: ''
