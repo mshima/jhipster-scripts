@@ -21,14 +21,10 @@ permissions:
 jobs:
   upgrade:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ${{ github.workspace }}/${{github.event.inputs.blueprint}}
     steps:
       - uses: actions/checkout@v3
         with:
           repository: '${{github.event.inputs.owner}}/${{github.event.inputs.blueprint}}'
-          path: ${{github.event.inputs.blueprint}}
       - run: npm install generator-jhipster@${{github.event.inputs.generator-jhipster-version}} --save-exact
       - run: npm run update-snapshot
       - run: git commit -a -m "bump generator-jhipster to v${{github.event.inputs.generator-jhipster-version}}" || true
