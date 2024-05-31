@@ -17,6 +17,8 @@ on:
       generator-jhipster-version:
         default: latest
         description: JHipster version
+      extra-args:
+        description: Extra arguments
 
 permissions:
   contents: read
@@ -39,7 +41,7 @@ jobs:
       - uses: jhipster/actions/setup-runner@v0
       - name: upgrade to generator-jhipster@${{ inputs.generator-jhipster-version }}
         run: |
-          npx generator-jhipster@${{ inputs.generator-jhipster-version }} generate-blueprint --force
+          npx generator-jhipster@${{ inputs.generator-jhipster-version }} generate-blueprint --force ${{ inputs.extra-args }}
           rm -rf node_modules package-lock.json
           npm install
       - name: Create Pull Request
