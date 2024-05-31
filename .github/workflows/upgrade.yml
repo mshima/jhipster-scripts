@@ -8,6 +8,16 @@ on:
       blueprint:
         required: true
         description: Blueprint repository to be upgraded
+        type: choice
+        options:
+          - generator-jhipster-native
+          - generator-jhipster-migrate
+          - generator-jhipster-entity-audit
+          - generator-jhipster-ionic
+          - generator-jhipster-react-native
+          - generator-jhipster-micronaut
+          - generator-jhipster-nodejs
+          - generator-jhipster-tenantview
       owner:
         default: jhipster
         description: Repository owner
