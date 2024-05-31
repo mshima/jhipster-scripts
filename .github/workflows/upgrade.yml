@@ -45,6 +45,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
+          path: ${{ github.workspace }}/${{github.event.inputs.blueprint}}
           push-to-fork: ${{github.event.inputs.fork-owner}}/${{github.event.inputs.blueprint}}
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: Update generator-jhipster to ${{ inputs.version }}
