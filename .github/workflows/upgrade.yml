@@ -25,9 +25,10 @@ on:
         default: mshima
         description: Fork repository owner
       generator-jhipster-version:
-        default: latest
+        default: 8.5.0
         description: JHipster version
       extra-args:
+        default: --github-workflows
         description: Extra arguments
 
 permissions:
