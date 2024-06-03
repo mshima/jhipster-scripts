@@ -18,6 +18,7 @@ on:
           - generator-jhipster-micronaut
           - generator-jhipster-nodejs
           - generator-jhipster-tenantview
+          - generator-jhipster-es-reindexer
       owner:
         default: jhipster
         description: Repository owner
