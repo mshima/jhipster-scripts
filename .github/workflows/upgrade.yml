@@ -59,7 +59,7 @@ jobs:
         uses: peter-evans/create-pull-request@v6
         with:
           path: ${{ github.workspace }}/${{ inputs.blueprint }}
-          push-to-fork: ${{inputs.fork-owner}}/${{ inputs.blueprint }}
+          push-to-fork: ${{ inputs.fork-owner && format('{0}/{1}', inputs.fork-owner, inputs.blueprint) || '' }}
           token: ${{ secrets.UPGRADE_PAT }}
           commit-message: Update generator-jhipster to ${{ inputs.generator-jhipster-version }}
           title: Update generator-jhipster to ${{ inputs.generator-jhipster-version }}
