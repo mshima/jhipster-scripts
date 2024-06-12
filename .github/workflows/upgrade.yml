@@ -54,6 +54,8 @@ jobs:
           repository: ${{ inputs.owner }}/${{ inputs.blueprint }}
           path: ${{ inputs.blueprint }}
       - uses: jhipster/actions/setup-runner@v0
+        with:
+          node-version: 20
       - run: npm install -g ${{ inputs.generator-jhipster }}
       - run: echo "version=$(jhipster --version)" >> "$GITHUB_OUTPUT"
         id: version
