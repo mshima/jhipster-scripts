@@ -14,10 +14,10 @@ on:
           - jhipster/generator-jhipster-jooq
           - mshima/generator-jhipster-tenantview
           - mshima/generator-jhipster-es-reindexer
-      increment:
+      extra-args:
         required: true
         type: string
-        default: minor
+        default: --increment minor --dry-run
         description: Type of npm version bump
 
 jobs:
@@ -39,7 +39,7 @@ jobs:
       - run: npm ci
       # - run: npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
       - run: cat /home/runner/work/_temp/.npmrc
-      - run: npx release-it --dry-run --ci -VV --increment ${{ inputs.increment }}
+      - run: npx release-it --ci -VV ${{ inputs.extra-args }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.UPGRADE_PAT }}
