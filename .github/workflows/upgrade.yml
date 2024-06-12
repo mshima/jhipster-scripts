@@ -28,8 +28,8 @@ on:
       fork-owner:
         default: mshima
         description: Fork repository owner
-      generator-jhipster-version:
-        default: 8.5.0
+      generator-jhipster:
+        default: 'generator-jhipster@latest'
         description: JHipster version
       extra-args:
         default: --github-workflows
@@ -40,7 +40,7 @@ permissions:
 
 jobs:
   upgrade:
-    name: Upgrade ${{ inputs.blueprint }} to generator-jhipster@${{ inputs.generator-jhipster-version }}
+    name: Upgrade ${{ inputs.blueprint }} to generator-jhipster@${{ inputs.generator-jhipster }}
     permissions:
       contents: write # for peter-evans/create-pull-request to create branch
       pull-requests: write # for peter-evans/create-pull-request to create a PR
@@ -54,9 +54,12 @@ jobs:
           repository: ${{ inputs.owner }}/${{ inputs.blueprint }}
           path: ${{ inputs.blueprint }}
       - uses: jhipster/actions/setup-runner@v0
-      - name: upgrade to generator-jhipster@${{ inputs.generator-jhipster-version }}
+      - run: npm install ${{ inputs.generator-jhipster }}
+      - run: echo "version=$(jhipster --version)" >> "$GITHUB_OUTPUT"
+        id: version
+      - name: upgrade to generator-jhipster@${{ steps.version.outputs.version }}
         run: |
-          npx generator-jhipster@${{ inputs.generator-jhipster-version }} generate-blueprint --force ${{ inputs.extra-args }}
+          jhipster generate-blueprint --force ${{ inputs.extra-args }}
           rm -rf node_modules package-lock.json
           npm install
       - name: Create Pull Request
@@ -65,7 +68,7 @@ jobs:
           path: ${{ github.workspace }}/${{ inputs.blueprint }}
           push-to-fork: ${{ inputs.fork-owner != inputs.owner && format('{0}/{1}', inputs.fork-owner, inputs.blueprint) || '' }}
           token: ${{ secrets.UPGRADE_PAT }}
-          commit-message: Update generator-jhipster to ${{ inputs.generator-jhipster-version }}
+          commit-message: Update generator-jhipster to ${{ steps.version.outputs.version }}
           title: Update generator-jhipster to ${{ inputs.generator-jhipster-version }}
           body: This is an automated pull request to update generator-jhipster
           branch: generator-jhipster-${{ inputs.generator-jhipster-version }}
