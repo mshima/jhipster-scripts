@@ -1,0 +1,39 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      repository:
+        required: true
+        description: Blueprint repository to be released
+        type: choice
+        options:
+          - jhipster/generator-jhipster-native
+          - jhipster/generator-jhipster-migrate
+          - jhipster/generator-jhipster-entity-audit
+          - jhipster/generator-jhipster-jooq
+          - mshima/generator-jhipster-tenantview
+          - mshima/generator-jhipster-es-reindexer
+      increment:
+        required: true
+        type: string
+        default: minor
+        description: Type of npm version bump
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          repository: ${{ inputs.repository }}
+          fetch-depth: 0
+      - name: git config
+        run: |
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+      - run: npm install
+      - run: npx release-it --dry-run --ci --increment ${{ inputs.minor }}
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
