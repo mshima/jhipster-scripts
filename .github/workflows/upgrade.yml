@@ -18,6 +18,7 @@ on:
           - generator-jhipster-micronaut
           - generator-jhipster-nodejs
           - generator-jhipster-quarkus
+          - generator-jhipster-jooq
           - generator-jhipster-tenantview
           - generator-jhipster-es-reindexer
           - jhipster-dotnetcore
