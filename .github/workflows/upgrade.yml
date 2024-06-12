@@ -28,9 +28,12 @@ on:
       fork-owner:
         default: mshima
         description: Fork repository owner
-      generator-jhipster:
-        default: jhipster/generator-jhipster#v8.5.0
-        description: JHipster spec
+      repository:
+        default: jhipster/generator-jhipster
+        description: JHipster repository
+      ref:
+        default: v8.5.0
+        description: JHipster ref
       extra-args:
         default: --github-workflows
         description: Extra arguments
@@ -40,7 +43,7 @@ permissions:
 
 jobs:
   upgrade:
-    name: Upgrade ${{ inputs.blueprint }} to generator-jhipster@${{ inputs.generator-jhipster }}
+    name: Upgrade ${{ inputs.blueprint }} to generator-jhipster@${{ inputs.ref }}
     permissions:
       contents: write # for peter-evans/create-pull-request to create branch
       pull-requests: write # for peter-evans/create-pull-request to create a PR
@@ -52,7 +55,8 @@ jobs:
       # Use git repository due to https://github.com/npm/cli/issues/6984
       - uses: actions/checkout@v4
         with:
-          repository: ${{ inputs.generator-jhipster }}
+          repository: ${{ inputs.repository }}
+          ref: ${{ inputs.ref }}
           path: generator-jhipster
       - uses: actions/checkout@v4
         with:
