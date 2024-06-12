@@ -29,7 +29,7 @@ on:
         default: mshima
         description: Fork repository owner
       generator-jhipster:
-        default: 'generator-jhipster@latest'
+        default: jhipster/generator-jhipster#v8.5.0
         description: JHipster spec
       extra-args:
         default: --github-workflows
@@ -49,6 +49,11 @@ jobs:
       run:
         working-directory: ${{ github.workspace }}/${{ inputs.blueprint }}
     steps:
+      # Use git repository due to https://github.com/npm/cli/issues/6984
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ inputs.generator-jhipster }}
+          path: generator-jhipster
       - uses: actions/checkout@v4
         with:
           repository: ${{ inputs.owner }}/${{ inputs.blueprint }}
@@ -56,13 +61,14 @@ jobs:
       - uses: jhipster/actions/setup-runner@v0
         with:
           node-version: 20
-      - run: npm install -g rimraf
-      - run: npm install -g ${{ inputs.generator-jhipster }}
-      - run: echo "version=$(jhipster --version)" >> "$GITHUB_OUTPUT"
+          binary-dir: ${{ github.workspace }}/generator-jhipster/bin
+      - run: npm ci --ignore-scripts
+        working-directory: ${{ github.workspace }}/generator-jhipster
+      - run: echo "version=$(jhipster.cjs --version)" >> "$GITHUB_OUTPUT"
         id: version
       - name: upgrade to generator-jhipster@${{ steps.version.outputs.version }}
         run: |
-          jhipster generate-blueprint --force ${{ inputs.extra-args }}
+          jhipster.cjs generate-blueprint --force ${{ inputs.extra-args }}
           rm -rf node_modules package-lock.json
           npm install
       - name: Create Pull Request
