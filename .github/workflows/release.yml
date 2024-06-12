@@ -37,8 +37,8 @@ jobs:
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
       - run: npm install
-      - run: npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
-      - run: cat ~/.npmrc
+      # - run: npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
+      - run: cat /home/runner/work/_temp/.npmrc
       - run: npx release-it --dry-run --ci --increment ${{ inputs.minor }}
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
