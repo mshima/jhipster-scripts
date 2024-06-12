@@ -28,6 +28,7 @@ jobs:
         with:
           repository: ${{ inputs.repository }}
           fetch-depth: 0
+          token: ${{ secrets.UPGRADE_PAT }}
       - uses: actions/setup-node@v4
         with:
           node-version: 20
