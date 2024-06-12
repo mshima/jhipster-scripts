@@ -28,6 +28,10 @@ jobs:
         with:
           repository: ${{ inputs.repository }}
           fetch-depth: 0
+      - uses: actions/setup-node@v4.0.2
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org/
       - name: git config
         run: |
           git config user.name "${GITHUB_ACTOR}"
