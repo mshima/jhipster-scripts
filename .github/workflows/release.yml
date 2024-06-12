@@ -29,6 +29,7 @@ jobs:
           repository: ${{ inputs.repository }}
           fetch-depth: 0
           token: ${{ secrets.UPGRADE_PAT }}
+      - run: git config --unset-all http.https://github.com/.extraheader
       - run: git push -u origin
       - uses: actions/setup-node@v4
         with:
