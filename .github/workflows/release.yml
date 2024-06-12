@@ -39,7 +39,7 @@ jobs:
       - run: npm install
       # - run: npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
       - run: cat /home/runner/work/_temp/.npmrc
-      - run: npx release-it --dry-run --ci --increment ${{ inputs.minor }}
+      - run: npx release-it --dry-run --ci -VV --increment ${{ inputs.minor }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.UPGRADE_PAT }}
