@@ -1,0 +1,47 @@
+name: Copyright Update
+
+on:
+  workflow_dispatch:
+    inputs:
+      repository:
+        required: true
+        description: Blueprint repository
+        type: choice
+        options:
+          - jhipster/generator-jhipster-native
+          - jhipster/generator-jhipster-migrate
+          - jhipster/generator-jhipster-entity-audit
+          - jhipster/generator-jhipster-jooq
+          - mshima/generator-jhipster-tenantview
+          - mshima/generator-jhipster-es-reindexer
+          - jhipster/jhipster-kotlin
+      year:
+        required: true
+        type: string
+        default: '2024'
+        description: Current year
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: copyright update
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ inputs.repository }}
+          fetch-depth: 0
+          # token: ${{ secrets.CLASSIC_PAT }}
+      - name: Find and Replace
+        run: |
+          NEW_YEAR=${{ inputs.year }}
+          grep -rlZE "Copyright ([0-9]{4})-([0-9]{4}) " . | xargs -0 sed -i -E "s/Copyright ([0-9]{4})-([0-9]{4}) /Copyright \1-$NEW_YEAR /g"
+          git add .
+          git diff
+      #- name: Create Pull Request
+      #  uses: peter-evans/create-pull-request@v6
+      #  with:
+      #    token: ${{ secrets.CLASSIC_PAT }}
