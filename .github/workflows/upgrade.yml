@@ -73,6 +73,7 @@ jobs:
         id: version
       - name: upgrade to generator-jhipster@${{ steps.version.outputs.version }}
         run: |
+          npm uninstall eslint-plugin-import
           jhipster.cjs generate-blueprint --force ${{ inputs.extra-args }}
           rm -rf node_modules package-lock.json
           npm install
