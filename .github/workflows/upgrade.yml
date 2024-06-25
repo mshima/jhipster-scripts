@@ -74,9 +74,10 @@ jobs:
       - name: upgrade to generator-jhipster@${{ steps.version.outputs.version }}
         run: |
           npm uninstall eslint-plugin-import
-          jhipster.cjs generate-blueprint --force ${{ inputs.extra-args }}
           rm -rf node_modules package-lock.json
-          npm install
+          jhipster.cjs generate-blueprint --force ${{ inputs.extra-args }}
+          npm run prettier-format
+          npm run lint-fix
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
