@@ -29,13 +29,13 @@ on:
         default: mshima
         description: Fork repository owner
       repository:
-        default: jhipster/generator-jhipster
+        default: mshima/generator-jhipster
         description: JHipster repository
       ref:
-        default: v8.6.0
+        default: blueprint-workflows
         description: JHipster ref
       extra-args:
-        default: --github-workflows
+        default: --github-workflows --skip-workflows
         description: Extra arguments
 
 permissions:
