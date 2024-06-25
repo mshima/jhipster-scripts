@@ -83,7 +83,7 @@ jobs:
         with:
           path: ${{ github.workspace }}/${{ inputs.blueprint }}
           push-to-fork: ${{ inputs.fork-owner != inputs.owner && format('{0}/{1}', inputs.fork-owner, inputs.blueprint) || '' }}
-          token: ${{ secrets.CLASSIC_PAT }}
+          token: ${{ secrets.UPGRADE_PAT }}
           commit-message: Update generator-jhipster to ${{ steps.version.outputs.version }}
           title: Update generator-jhipster to ${{ steps.version.outputs.version }}
           body: This is an automated pull request to update generator-jhipster
