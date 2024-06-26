@@ -5,6 +5,10 @@ title: 'Update blueprints to generator-jhipster v8.x.x'
 labels: ''
 assignees: ''
 body:
+  - type: markdown
+    attributes:
+      value: |
+        Tracking update process
   - type: dropdown
     id: repository
     attributes:
