@@ -5,9 +5,11 @@ on:
 permissions:
   contents: read
 jobs:
-  upgrade:
+  parse:
     runs-on: ubuntu-latest
-    if: "${{ github.event.label.name == 'upgrade' }}"
+    outputs:
+      blueprint: ${{ steps.issue-parser.outputs.issueparser_blueprint }}
+      owner: ${{ steps.issue-parser.outputs.issueparser_owner }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -20,11 +22,15 @@ jobs:
       - run: echo $BLUEPRINT
         env:
           BLUEPRINT: ${{ steps.issue-parser.outputs.issueparser_blueprint }}
-      - uses: mshima/jhipster-scripts/.github/workflows/upgrade.yml@main
-        with:
-          blueprint: ${{ steps.issue-parser.outputs.issueparser_blueprint }}
-          owner: ${{ steps.issue-parser.outputs.issueparser_owner }}
-          extra-args: --github-workflows --skip-workflows --dry-run
+  upgrade:
+    if: "${{ github.event.label.name == 'upgrade' }}"
+    uses: mshima/jhipster-scripts/.github/workflows/upgrade.yml@main
+    needs: [parse]
+    with:
+      blueprint: ${{ needs.parse.outputs.blueprint }}
+      owner: ${{ needs.parse.outputs.owner }}
+      extra-args: --github-workflows --skip-workflows --dry-run
+    secrets: inherit
   remove_label:
     runs-on: ubuntu-latest
     needs: upgrade
