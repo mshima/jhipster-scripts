@@ -20,7 +20,7 @@ jobs:
       - run: echo $BLUEPRINT
         env:
           BLUEPRINT: ${{ steps.issue-parser.outputs.issueparser_blueprint }}
-      - uses: ./jhipster-scripts/.github/workflows/upgrade.yml
+      - uses: mshima/jhipster-scripts/.github/workflows/upgrade.yml@main
         with:
           blueprint: ${{ steps.issue-parser.outputs.issueparser_blueprint }}
           owner: ${{ steps.issue-parser.outputs.issueparser_owner }}
