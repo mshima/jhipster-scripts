@@ -2,8 +2,6 @@
 name: Update blueprints version
 about: Track blueprints update.
 title: 'Update blueprints to generator-jhipster v8.x.x'
-labels: ''
-assignees: ''
 body:
   - type: markdown
     attributes:
