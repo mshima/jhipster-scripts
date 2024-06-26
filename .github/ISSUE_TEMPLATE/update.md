@@ -26,6 +26,17 @@ body:
       default: 0
     validations:
       required: true
+  - type: dropdown
+    id: owner
+    attributes:
+      label: Owner
+      description: 'What owner to use the repository as reference?'
+      options:
+        - jhipster
+        - mshima
+      default: 0
+    validations:
+      required: true
 
 ---
 
