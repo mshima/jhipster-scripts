@@ -1,0 +1,47 @@
+name: Issue Check
+on:
+  issues:
+    types: [labeled]
+permissions:
+  contents: read
+jobs:
+  upgrade:
+    runs-on: ubuntu-latest
+    if: "${{ github.event.label.name == 'upgrade' }}"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: jhipster-scripts
+      - uses: stefanbuck/github-issue-parser@v3
+        id: issue-parser
+        with:
+          template-path: jhipster-scripts/.github/ISSUE_TEMPLATE/update.yml
+      - run: cat ${HOME}/issue-parser-result.json
+      - run: echo $BLUEPRINT
+        env:
+          BLUEPRINT: ${{ steps.issue-parser.outputs.issueparser_blueprint }}
+      - uses: ./jhipster-scripts/blob/main/.github/workflows/upgrade.yml
+        with:
+          blueprint: ${{ steps.issue-parser.outputs.issueparser_blueprint }}
+          owner: ${{ steps.issue-parser.outputs.issueparser_owner }}
+          extra-args: --github-workflows --skip-workflows --dry-run
+  remove_label:
+    runs-on: ubuntu-latest
+    needs: upgrade
+    if: success() || failure()
+    permissions:
+      issues: write
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const issue = { owner: context.issue.owner, repo: context.issue.repo, issue_number: context.issue.number }
+            github.rest.issues.listLabelsOnIssue({...issue}).then(response => {
+              const labels = response.data
+              for (const label of labels) {
+                  if (label.name == 'upgrade') {
+                      github.rest.issues.removeLabel({...issue, name: label.name})
+                  }
+              }
+            })
