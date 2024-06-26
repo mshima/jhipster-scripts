@@ -23,8 +23,11 @@ jobs:
         env:
           BLUEPRINT: ${{ steps.issue-parser.outputs.issueparser_blueprint }}
   upgrade:
-    if: "${{ github.event.label.name == 'upgrade' }}"
     uses: mshima/jhipster-scripts/.github/workflows/upgrade.yml@main
+    if: "${{ github.event.label.name == 'upgrade' }}"
+    permissions:
+      contents: write
+      pull-requests: write
     needs: [parse]
     with:
       blueprint: ${{ needs.parse.outputs.blueprint }}
