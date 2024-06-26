@@ -7,10 +7,10 @@ body:
       value: |
         Tracking update process
   - type: dropdown
-    id: repository
+    id: blueprint
     attributes:
-      label: Repository
-      description: 'What repository do you want to update?'
+      label: Blueprint
+      description: 'What blueprint do you want to update?'
       options:
         - generator-jhipster-native
         - generator-jhipster-migrate
