@@ -25,16 +25,21 @@ on:
       owner:
         default: jhipster
         description: Repository owner
-      fork-owner:
-        default: mshima
-        description: Fork repository owner
-      repository:
-        default: mshima/generator-jhipster
-        description: JHipster repository
-      ref:
-        default: blueprint-workflows
-        description: JHipster ref
       extra-args:
+        default: --github-workflows --skip-workflows
+        description: Extra arguments
+  workflow_call:
+    inputs:
+      blueprint:
+        type: string
+        required: true
+        description: Blueprint repository to be upgraded
+      owner:
+        type: string
+        default: jhipster
+        description: Repository owner
+      extra-args:
+        type: string
         default: --github-workflows --skip-workflows
         description: Extra arguments
 
@@ -55,8 +60,8 @@ jobs:
       # Use git repository due to https://github.com/npm/cli/issues/6984
       - uses: actions/checkout@v4
         with:
-          repository: ${{ inputs.repository }}
-          ref: ${{ inputs.ref }}
+          repository: mshima/generator-jhipster
+          ref: blueprint-workflows
           path: generator-jhipster
       - uses: actions/checkout@v4
         with:
@@ -82,7 +87,7 @@ jobs:
         uses: peter-evans/create-pull-request@v6
         with:
           path: ${{ github.workspace }}/${{ inputs.blueprint }}
-          push-to-fork: ${{ inputs.fork-owner != inputs.owner && format('{0}/{1}', inputs.fork-owner, inputs.blueprint) || '' }}
+          push-to-fork: ${{ 'mshima' != inputs.owner && format('{0}/{1}', 'mshima', inputs.blueprint) || '' }}
           # Use CLASSIC_PAT for PRs permission
           token: ${{ secrets.CLASSIC_PAT }}
           # Use UPGRADE_PAT for workflow permission
