@@ -85,8 +85,7 @@ jobs:
       - name: upgrade to generator-jhipster@${{ steps.version.outputs.version }}
         run: |
           npm uninstall eslint-plugin-import eslint-config-airbnb-base
-          rm -rf node_modules package-lock.json
-          jhipster.cjs generate-blueprint --force ${{ inputs.extra-args }}
+          jhipster.cjs generate-blueprint --force --skip-workflows --ignore-existing-generators --recreate-package-lock ${{ inputs.extra-args }}
           npm run prettier-format || true
           npm run lint-fix || true
       - name: Create Pull Request
