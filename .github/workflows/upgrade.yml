@@ -60,6 +60,8 @@ jobs:
     defaults:
       run:
         working-directory: ${{ github.workspace }}/${{ inputs.blueprint }}
+    outputs:
+      pull-request-url: ${{ steps.create-pull-request.outputs.pull-request-url }}
     steps:
       # Use git repository due to https://github.com/npm/cli/issues/6984
       - uses: actions/checkout@v4
@@ -89,6 +91,7 @@ jobs:
           npm run lint-fix || true
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
+        id: create-pull-request
         with:
           path: ${{ github.workspace }}/${{ inputs.blueprint }}
           push-to-fork: ${{ 'mshima' != inputs.owner && format('{0}/{1}', 'mshima', inputs.blueprint) || '' }}
