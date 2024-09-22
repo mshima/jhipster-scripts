@@ -42,6 +42,10 @@ on:
         type: string
         default: --github-workflows --skip-workflows
         description: Extra arguments
+    outputs:
+      pull-request-url:
+        description: "PR link"
+        value: ${{ jobs.upgrade.outputs.pull-request-url }}
 
 permissions:
   contents: read
