@@ -32,7 +32,7 @@ jobs:
     with:
       blueprint: ${{ needs.parse.outputs.blueprint }}
       owner: ${{ needs.parse.outputs.owner }}
-      extra-args: --github-workflows --skip-workflows --dry-run
+      extra-args: --github-workflows --skip-workflows
     secrets: inherit
   comment:
     runs-on: ubuntu-latest
@@ -44,7 +44,7 @@ jobs:
         with:
           issue: ${{ github.event.issue.number }}
           message: |
-            PR generated: ${{ needs.parse.outputs.pr }}
+            PR generated: ${{ needs.upgrade.outputs.pull-request-url }}
   remove_label:
     runs-on: ubuntu-latest
     needs: [parse]
