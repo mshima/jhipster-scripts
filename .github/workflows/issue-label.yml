@@ -10,6 +10,7 @@ jobs:
     outputs:
       blueprint: ${{ steps.issue-parser.outputs.issueparser_blueprint }}
       owner: ${{ steps.issue-parser.outputs.issueparser_owner }}
+      extra-args: ${{ steps.issue-parser.outputs.issueparser_extra_args }}
     steps:
       - uses: actions/checkout@v4
         with:
