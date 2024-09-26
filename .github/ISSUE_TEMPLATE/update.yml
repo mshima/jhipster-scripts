@@ -38,3 +38,11 @@ body:
       default: 0
     validations:
       required: true
+  - type: input
+    id: extra-args
+    attributes:
+      label: Extra Args
+      description: Extra Args
+      placeholder: extra args
+    validations:
+      required: false
