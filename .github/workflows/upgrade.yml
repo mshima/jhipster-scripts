@@ -52,7 +52,7 @@ permissions:
 
 jobs:
   upgrade:
-    name: Upgrade ${{ inputs.blueprint }} to generator-jhipster@${{ steps.version.outputs.version }}
+    name: Upgrade ${{ inputs.blueprint }} to generator-jhipster@latest
     permissions:
       contents: write # for peter-evans/create-pull-request to create branch
       pull-requests: write # for peter-evans/create-pull-request to create a PR
