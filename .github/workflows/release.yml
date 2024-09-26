@@ -38,6 +38,7 @@ jobs:
         run: |
           git config --global user.name "Marcelo Shima"
           git config --global user.email "marceloshima@gmail.com"
+          ssh -T git@github.com
       - uses: actions/checkout@v4
         with:
           repository: ${{ inputs.repository }}
