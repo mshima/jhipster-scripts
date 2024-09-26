@@ -39,7 +39,7 @@ jobs:
           git config --global user.name "Marcelo Shima"
           git config --global user.email "marceloshima@gmail.com"
           ssh -T git@github.com || true
-      - run: git clone ${{ inputs.repository }}
+      - run: git clone git@github.com:${{ inputs.repository }}.git
       # - run: git config --unset-all http.https://github.com/.extraheader
       - run: git push -u origin
       - uses: actions/setup-node@v4
