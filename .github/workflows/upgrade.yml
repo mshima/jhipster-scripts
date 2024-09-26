@@ -52,7 +52,7 @@ permissions:
 
 jobs:
   upgrade:
-    name: Upgrade ${{ inputs.blueprint }} to generator-jhipster@${{ inputs.ref }}
+    name: Upgrade ${{ inputs.blueprint }} to generator-jhipster@${{ steps.version.outputs.version }}
     permissions:
       contents: write # for peter-evans/create-pull-request to create branch
       pull-requests: write # for peter-evans/create-pull-request to create a PR
@@ -85,7 +85,7 @@ jobs:
       - name: upgrade to generator-jhipster@${{ steps.version.outputs.version }}
         run: |
           npm uninstall eslint-plugin-import eslint-config-airbnb-base
-          jhipster.cjs generate-blueprint --force --ignore-existing-generators --recreate-package-lock --commit-msg 'update generator-jhipster to ${{ inputs.ref }}' ${{ inputs.extra-args }}
+          jhipster.cjs generate-blueprint --force --ignore-existing-generators --recreate-package-lock --commit-msg 'update generator-jhipster to ${{ steps.version.outputs.version }}' ${{ inputs.extra-args }}
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         id: create-pull-request
