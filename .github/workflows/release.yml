@@ -36,8 +36,8 @@ jobs:
           echo "$SSH_PRIVATE_KEY" | tr -d '\r' | DISPLAY=None SSH_ASKPASS=~/.ssh_askpass ssh-add - >/dev/null
       - name: git config
         run: |
-          git config user.name "Marcelo Shima"
-          git config user.email "marceloshima@gmail.com"
+          git config --global user.name "Marcelo Shima"
+          git config --global user.email "marceloshima@gmail.com"
       - uses: actions/checkout@v4
         with:
           repository: ${{ inputs.repository }}
