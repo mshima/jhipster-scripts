@@ -43,6 +43,7 @@ jobs:
       - uses: mshick/add-pr-comment@v2.8.2
         with:
           issue: ${{ github.event.issue.number }}
+          refresh-message-position: true
           message: |
             PR generated: ${{ needs.upgrade.outputs.pull-request-url }}
   remove_label:
