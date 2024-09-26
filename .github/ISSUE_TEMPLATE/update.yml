@@ -39,7 +39,7 @@ body:
     validations:
       required: true
   - type: input
-    id: extra-args
+    id: extra_args
     attributes:
       label: Extra Args
       description: Extra Args
