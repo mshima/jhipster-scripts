@@ -32,7 +32,7 @@ jobs:
     with:
       blueprint: ${{ needs.parse.outputs.blueprint }}
       owner: ${{ needs.parse.outputs.owner }}
-      extra-args: --github-workflows --skip-workflows
+      extra-args: ${{ needs.parse.outputs.extra-args }}
     secrets: inherit
   comment:
     runs-on: ubuntu-latest
