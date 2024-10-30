@@ -23,10 +23,9 @@ on:
           - generator-jhipster-es-reindexer
           - jhipster-dotnetcore
       owner:
-        default: jhipster
+        default: mshima
         description: Repository owner
       extra-args:
-        default: --github-workflows --skip-workflows
         description: Extra arguments
       ref:
         default: blueprint-workflows
@@ -43,7 +42,6 @@ on:
         description: Repository owner
       extra-args:
         type: string
-        default: --github-workflows --skip-workflows
         description: Extra arguments
       ref:
         type: string
