@@ -42,7 +42,7 @@ on:
         description: Repository owner
       extra-args:
         type: string
-        description: Extra arguments
+        description: Extra arguments (--skip-workflows)
       ref:
         type: string
         default: blueprint-workflows
