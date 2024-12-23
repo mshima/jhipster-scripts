@@ -80,7 +80,7 @@ jobs:
           path: ${{ inputs.blueprint }}
           token: ${{ secrets.CLASSIC_PAT }}
       - run: |
-          git remote add upstream git@github.com:jhipster/${{ inputs.blueprint }}.git
+          git remote add upstream https://github.com/jhipster/${{ inputs.blueprint }}.git
           git fetch --all
           git rebase upstream/main
           git push
