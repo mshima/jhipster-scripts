@@ -79,6 +79,11 @@ jobs:
           repository: ${{ inputs.owner }}/${{ inputs.blueprint }}
           path: ${{ inputs.blueprint }}
           token: ${{ secrets.CLASSIC_PAT }}
+      - run: |
+          git remote add upstream git@github.com:jhipster/${{ inputs.blueprint }}.git
+          git fetch --all
+          git rebase upstream/main
+          git push
       - uses: jhipster/actions/setup-runner@v0
         with:
           node-version: 20
