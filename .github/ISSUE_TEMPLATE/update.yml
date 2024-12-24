@@ -24,6 +24,7 @@ body:
         - generator-jhipster-tenantview
         - generator-jhipster-es-reindexer
         - jhipster-dotnetcore
+      default: 0
     validations:
       required: true
   - type: dropdown
