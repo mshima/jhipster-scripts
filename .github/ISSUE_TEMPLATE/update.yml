@@ -12,19 +12,18 @@ body:
       label: Blueprint
       description: 'What blueprint do you want to update?'
       options:
-        - generator-jhipster-native
-        - generator-jhipster-migrate
-        - generator-jhipster-entity-audit
-        - generator-jhipster-ionic
-        - generator-jhipster-react-native
-        - generator-jhipster-micronaut
-        - generator-jhipster-nodejs
-        - generator-jhipster-quarkus
-        - generator-jhipster-jooq
-        - generator-jhipster-tenantview
-        - generator-jhipster-es-reindexer
-        - jhipster-dotnetcore
-      default: 0
+        - label: generator-jhipster-native
+        - label: generator-jhipster-migrate
+        - label: generator-jhipster-entity-audit
+        - label: generator-jhipster-ionic
+        - label: generator-jhipster-react-native
+        - label: generator-jhipster-micronaut
+        - label: generator-jhipster-nodejs
+        - label: generator-jhipster-quarkus
+        - label: generator-jhipster-jooq
+        - label: generator-jhipster-tenantview
+        - label: generator-jhipster-es-reindexer
+        - label: jhipster-dotnetcore
     validations:
       required: true
   - type: dropdown
