@@ -8,14 +8,12 @@ jobs:
   parse:
     runs-on: ubuntu-latest
     outputs:
-      blueprint: ${{ steps.issue-parser.outputs.issueparser_blueprint }}
-      owner: ${{ steps.issue-parser.outputs.issueparser_owner }}
-      extra-args: ${{ steps.issue-parser.outputs.issueparser_extra_args }}
+      matrix: ${{ steps.issue-parser.outputs.issueparser_matrix }}
     steps:
       - uses: actions/checkout@v4
         with:
           path: jhipster-scripts
-      - uses: stefanbuck/github-issue-parser@v3
+      - uses: mshima/github-issue-parser@matrix
         id: issue-parser
         with:
           template-path: jhipster-scripts/.github/ISSUE_TEMPLATE/update.yml
@@ -30,10 +28,13 @@ jobs:
       contents: write
       pull-requests: write
     needs: [parse]
+    strategy:
+      fail-fast: false
+      matrix: ${{fromJson(needs.parse.outputs.matrix)}}
     with:
-      blueprint: ${{ needs.parse.outputs.blueprint }}
-      owner: ${{ needs.parse.outputs.owner }}
-      extra-args: ${{ needs.parse.outputs.extra-args }}
+      blueprint: ${{ matrix.blueprint }}
+      owner: ${{ matrix.owner }}
+      extra-args: ${{ matrix.extra_args }}
     secrets: inherit
   comment:
     runs-on: ubuntu-latest
