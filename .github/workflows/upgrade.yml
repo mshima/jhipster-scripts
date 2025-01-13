@@ -94,9 +94,7 @@ jobs:
       - run: echo "version=$(jhipster.cjs --version)" >> "$GITHUB_OUTPUT"
         id: version
       - name: upgrade to generator-jhipster@${{ steps.version.outputs.version }}
-        run: |
-          npm uninstall eslint-plugin-import eslint-config-airbnb-base
-          jhipster.cjs generate-blueprint --force --ignore-existing-generators --recreate-package-lock --commit-msg 'update generator-jhipster to ${{ steps.version.outputs.version }}' ${{ inputs.extra-args }} || true
+        run: jhipster.cjs generate-blueprint --force --ignore-existing-generators --recreate-package-lock --commit-msg 'update generator-jhipster to ${{ steps.version.outputs.version }}' ${{ inputs.extra-args }} || true
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         id: create-pull-request
