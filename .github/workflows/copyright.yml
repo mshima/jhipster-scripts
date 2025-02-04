@@ -18,10 +18,12 @@ on:
           - generator-jhipster-es-reindexer
           - jhipster-kotlin
       ref:
+        required: true
         type: string
         default: 'main'
         description: Branch
       base-owner:
+        required: true
         type: string
         default: 'jhipster'
         description: Base owner
@@ -37,7 +39,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          repository: ${{ inputs.owner }}/${{ inputs.repository }}
+          repository: ${{ inputs.base-owner }}/${{ inputs.repository }}
           ref: ${{ inputs.ref }}
           fetch-depth: 0
           token: ${{ secrets.CLASSIC_PAT }}
