@@ -8,18 +8,22 @@ on:
         description: Repository
         type: choice
         options:
-          - mshima/generator-jhipster
-          - mshima/generator-jhipster-native
-          - mshima/generator-jhipster-migrate
-          - mshima/generator-jhipster-entity-audit
-          - mshima/generator-jhipster-jooq
-          - mshima/generator-jhipster-tenantview
-          - mshima/generator-jhipster-es-reindexer
-          - mshima/jhipster-kotlin
+          - generator-jhipster
+          - generator-jhipster-native
+          - generator-jhipster-migrate
+          - generator-jhipster-entity-audit
+          - generator-jhipster-jooq
+          - generator-jhipster-tenantview
+          - generator-jhipster-es-reindexer
+          - jhipster-kotlin
       ref:
         type: string
         default: 'main'
         description: Branch
+      base-owner:
+        type: string
+        default: 'jhipster'
+        description: Base owner
 
 permissions:
   contents: read
@@ -32,7 +36,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          repository: ${{ inputs.repository }}
+          repository: ${{ inputs.owner }}/${{ inputs.repository }}
           ref: ${{ inputs.ref }}
           fetch-depth: 0
           token: ${{ secrets.CLASSIC_PAT }}
@@ -44,6 +48,7 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.CLASSIC_PAT }}
+          push-to-fork: mshima/${{ inputs.repository }}
           commit-message: 'Update copyright headers'
           title: 'Update Copyright Headers'
           body: 'This is an automated pull request to update the copyright headers'
