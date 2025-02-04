@@ -16,7 +16,7 @@ on:
           - mshima/generator-jhipster-tenantview
           - mshima/generator-jhipster-es-reindexer
           - mshima/jhipster-kotlin
-      branch:
+      ref:
         type: string
         default: 'main'
         description: Branch
@@ -33,6 +33,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: ${{ inputs.repository }}
+          ref: ${{ inputs.ref }}
           fetch-depth: 0
           token: ${{ secrets.CLASSIC_PAT }}
       - name: Find and Replace
