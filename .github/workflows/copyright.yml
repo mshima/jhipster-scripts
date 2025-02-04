@@ -9,10 +9,11 @@ on:
         type: choice
         options:
           - generator-jhipster
-          - generator-jhipster-native
-          - generator-jhipster-migrate
           - generator-jhipster-entity-audit
+          - generator-jhipster-ionic
           - generator-jhipster-jooq
+          - generator-jhipster-migrate
+          - generator-jhipster-native
           - generator-jhipster-tenantview
           - generator-jhipster-es-reindexer
           - jhipster-kotlin
