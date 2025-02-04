@@ -37,7 +37,7 @@ jobs:
           token: ${{ secrets.CLASSIC_PAT }}
       - name: Find and Replace
         run: |
-          grep -rlZE "Copyright 20[0-9]{2}-" . | xargs -0 sed -i -E "s/Copyright ([0-9]{4})-([0-9]{4})/Copyright \1-$(date +'%Y')/g"
+          grep -rlZE --exclude-dir="\.git" "Copyright 20[0-9]{2}-" . | xargs -0 sed -i -E "s/Copyright ([0-9]{4})-([0-9]{4})/Copyright \1-$(date +'%Y')/g"
           git diff
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
