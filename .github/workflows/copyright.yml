@@ -49,7 +49,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
-          branch-token: ${{ secrets.CLASSIC_PAT }}
+          branch-token: ${{ secrets.UPGRADE_PAT }}
           push-to-fork: mshima/${{ inputs.repository }}
           commit-message: 'Update copyright headers'
           title: 'Update Copyright Headers'
