@@ -13,6 +13,7 @@ on:
           - jhipster/generator-jhipster-migrate
           - jhipster/generator-jhipster-entity-audit
           - jhipster/generator-jhipster-jooq
+          - jhipster/generator-jhipster-jooq
           - mshima/generator-jhipster-tenantview
           - mshima/generator-jhipster-es-reindexer
           - yeoman/generator
