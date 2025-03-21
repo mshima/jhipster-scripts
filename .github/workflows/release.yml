@@ -17,6 +17,8 @@ on:
           - mshima/generator-jhipster-tenantview
           - mshima/generator-jhipster-es-reindexer
           - yeoman/generator
+          - yeoman/yeoman-test
+          - yeoman/environment
       extra-args:
         required: true
         type: string
