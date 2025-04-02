@@ -78,7 +78,7 @@ jobs:
         with:
           repository: ${{ inputs.owner }}/${{ inputs.blueprint }}
           path: ${{ inputs.blueprint }}
-          token: ${{ secrets.CLASSIC_PAT }}
+          token: ${{ secrets.UPGRADE_PAT }}
           fetch-depth: 0
       - run: |
           git remote add upstream https://github.com/jhipster/${{ inputs.blueprint }}.git
