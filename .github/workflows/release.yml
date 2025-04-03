@@ -14,6 +14,11 @@ on:
           - jhipster/generator-jhipster-entity-audit
           - jhipster/generator-jhipster-jooq
           - jhipster/generator-jhipster-nodejs
+          - jhipster/generator-jhipster-micronaut
+          - jhipster/generator-jhipster-quarkus
+          - jhipster/generator-jhipster-ionic
+          - jhipster/generator-jhipster-react-native
+          - jhipster/generator-jhipster-dotnetcore
           - mshima/generator-jhipster-tenantview
           - mshima/generator-jhipster-es-reindexer
           - yeoman/generator
