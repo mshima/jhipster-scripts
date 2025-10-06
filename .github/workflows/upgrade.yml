@@ -85,7 +85,7 @@ jobs:
           git fetch --all
           git rebase upstream/main
           git push
-      - uses: jhipster/actions/setup-runner@v0
+      - uses: jhipster/actions/setup-runner@v1
         with:
           node-version: 20
           binary-dir: ${{ github.workspace }}/generator-jhipster/bin
