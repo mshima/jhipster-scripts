@@ -50,7 +50,7 @@ jobs:
       - run: git clone git@github.com:${{ inputs.repository }}.git .
       # - run: git config --unset-all http.https://github.com/.extraheader
       - run: git push -u origin
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: 20
           registry-url: https://registry.npmjs.org/
