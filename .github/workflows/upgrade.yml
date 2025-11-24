@@ -69,12 +69,12 @@ jobs:
       pull-request-url: ${{ steps.create-pull-request.outputs.pull-request-url }}
     steps:
       # Use git repository due to https://github.com/npm/cli/issues/6984
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           repository: mshima/generator-jhipster
           ref: ${{ inputs.ref }}
           path: generator-jhipster
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           repository: ${{ inputs.owner }}/${{ inputs.blueprint }}
           path: ${{ inputs.blueprint }}
